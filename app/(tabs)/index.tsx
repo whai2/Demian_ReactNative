@@ -1,7 +1,7 @@
-import { Text } from "react-native"
+import ChatList from "@/components/ChatList"
 
 export default function HomeScreen() {
   return (
-    <Text>HomeScreen</Text>
+    <ChatList/>
   )
 }
