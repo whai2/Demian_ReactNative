@@ -1,9 +1,10 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { QUERY_KEY } from "../query.key";
 import { conversationRequests } from "@/apis/conversations.api";
 
 export const useGetConversations = () => {
   return useQuery({
-    queryKey: ["conversations"],
+    queryKey: [QUERY_KEY.CONVERSATIONS],
     queryFn: async () => await conversationRequests.getAll(),
   });
 };
