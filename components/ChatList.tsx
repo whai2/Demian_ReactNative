@@ -3,48 +3,48 @@ import {
   SafeAreaView,
   View,
   Text,
-  Image,
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
 // import { Link } from 'expo-router'; // 필요시 Link 컴포넌트로 교체
 
 import FloatingButton from "./FloatingButton";
+import { useGetConversations } from "@/hooks/query/conversation";
+
+function extractTime(dateString: string) {
+  const date = new Date(dateString);
+  const hours = padZero(date.getHours());
+  const minutes = padZero(date.getMinutes());
+  return `${hours}:${minutes}`;
+}
+
+function padZero(number: number) {
+  return number.toString().padStart(2, '0');
+}
 
 export default function ChatList() {
+  const { data } = useGetConversations();
+
   return (
     <SafeAreaView style={styles.safeArea}>
+    {data.conversations.map((conversation: any) => (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.item}>
-          <View style={styles.itemInner}>
-            <View style={styles.itemTextContent}>
-              <Text style={styles.itemTitle}>Title</Text>
-              <View style={styles.wrap}>
-                <Text style={styles.itemLastMessage}>
-                  Last message content...
-                </Text>
-                <Text style={styles.itemLastMessageTime}>10:45 AM</Text>
-              </View>
+      <TouchableOpacity style={styles.item}>
+        <View style={styles.itemInner}>
+          <View style={styles.itemTextContent}>
+            <Text style={styles.itemTitle}>{conversation.title}</Text>
+            <View style={styles.wrap}>
+              <Text style={styles.itemLastMessage}>
+                Last message content...
+              </Text>
+              <Text style={styles.itemLastMessageTime}>{extractTime(conversation.updatedAt)}</Text>
             </View>
           </View>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.item}>
-          <View style={styles.itemInner}>
-            <View style={styles.itemTextContent}>
-              <Text style={styles.itemTitle}>Title</Text>
-              <View style={styles.wrap}>
-                <Text style={styles.itemLastMessage}>
-                  Last message content...
-                </Text>
-                <Text style={styles.itemLastMessageTime}>10:45 AM</Text>
-              </View>
-            </View>
-          </View>
-        </TouchableOpacity>
-      </View>
-      <FloatingButton />
+        </View>
+      </TouchableOpacity>
+    </View>
+    ))}
+    <FloatingButton />
     </SafeAreaView>
   );
 }
