@@ -16,7 +16,7 @@ export default function LoginScreen() {
       const response = await authRequests.signIn({ email, password });
       await storeToken(response.token);
 
-      router.replace("/(tabs)"); // 로그인 상태 업데이트
+      router.replace("/(tabs)"); 
     } catch (error) {
       Alert.alert("Error", "An error occurred during login");
     }

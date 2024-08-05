@@ -20,7 +20,7 @@ export default function SignUpScreen() {
       
       await storeToken(response.token);
 
-      // navigation.navigate('login');
+      router.replace("/(tabs)"); 
     } catch (error) {
       Alert.alert('Error', 'An error occurred during sign up');
     }
