@@ -8,7 +8,6 @@ export const authRequests = Object.freeze({
   },
 
   signUp: async (body: SignUpFormValues) => {
-    console.log(body);
     const { data } = await client.post("/auth/signup", body);
     return data;
   },

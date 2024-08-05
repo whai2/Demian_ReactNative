@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet, Alert } from 'react-native';
-import { authRequests } from '@/apis/auth.api';
-import useAuth from '@/hooks/zustand/useAuth';
+import React, { useState } from "react";
+import { Link } from "expo-router";
+import { View, TextInput, Button, StyleSheet, Alert } from "react-native";
+
+import { storeToken } from "@/async-storage/jwtToken";
+import { authRequests } from "@/apis/auth.api";
+import useAuth from "@/hooks/zustand/useAuth";
+
 
 export default function LoginScreen() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const login = useAuth((state) => state.login);
 
   const handleLogin = async () => {
     try {
-      await authRequests.signIn({ email, password });
-      Alert.alert('Success', 'Logged in successfully');
+      const response = await authRequests.signIn({ email, password });
+      await storeToken(response.token);
+
       login(); // 로그인 상태 업데이트
     } catch (error) {
-      Alert.alert('Error', 'An error occurred during login');
+      Alert.alert("Error", "An error occurred during login");
     }
   };
 
@@ -36,7 +41,9 @@ export default function LoginScreen() {
         secureTextEntry
       />
       <Button title="Login" onPress={handleLogin} />
-      {/* <Button title="Go to Sign Up" onPress={() => navigation.navigate('signup')} /> */}
+      <Link href="/signup" asChild>
+        <Button title="Go to Sign Up" />
+      </Link>
     </View>
   );
 }
@@ -44,12 +51,12 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     padding: 16,
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
     marginBottom: 12,
     paddingHorizontal: 8,

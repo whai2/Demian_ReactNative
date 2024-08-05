@@ -6,5 +6,5 @@ export type SignInFormValues = {
 export type SignUpFormValues = {
   email: string;
   password: string;
-  checkPassword: string;
+  confirmPassword: string;
 };
