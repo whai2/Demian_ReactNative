@@ -7,11 +7,19 @@ export const conversationRequests = Object.freeze({
   },
 
   makeNew: async (formData: any) => {
-    const { data } = await client.post("/conversations", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    return data;
-  },
+    try {
+      console.log(formData);
+      const { data } = await client.post("/conversations", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      
+      console.log('Response data:', data);
+      return data;
+    } catch (error) {
+      console.error('Error making request:', error);
+      throw error;
+    }
+  }
 });

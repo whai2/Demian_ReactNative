@@ -17,17 +17,17 @@ export default function FloatingButton() {
         return;
       }
 
-       const { uri, mimeType, name } = result.assets[0];
-
-      // 파일을 Blob으로 변환
-      const response = await fetch(uri);
-      const blob = await response.blob();
+      const { uri, mimeType, name, size } = result.assets[0];
+      const fileOject = {
+        name: name.split(".")[0],
+        uri: uri,
+        type: mimeType,
+        size: size
+      }
 
       // FormData 생성 및 파일 추가
       const formData = new FormData();
-      if (name && mimeType) {
-        formData.append('file', blob, name);
-      }
+      formData.append('file', fileOject as any);
 
       mutate(formData);
     } catch (err) {
