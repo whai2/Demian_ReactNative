@@ -1,5 +1,4 @@
 import { Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
-// import DocumentPicker from 'react-native-document-picker';
 import * as DocumentPicker from 'expo-document-picker';
 
 import { useMakeNewMutation } from "@/hooks/query/conversation";
