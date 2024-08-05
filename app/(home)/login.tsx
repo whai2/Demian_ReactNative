@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { View, TextInput, Button, StyleSheet, Alert } from "react-native";
 
 import { storeToken } from "@/async-storage/jwtToken";
 import { authRequests } from "@/apis/auth.api";
 import useAuth from "@/hooks/zustand/useAuth";
-
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
@@ -17,7 +16,7 @@ export default function LoginScreen() {
       const response = await authRequests.signIn({ email, password });
       await storeToken(response.token);
 
-      login(); // 로그인 상태 업데이트
+      router.replace("/(tabs)"); // 로그인 상태 업데이트
     } catch (error) {
       Alert.alert("Error", "An error occurred during login");
     }

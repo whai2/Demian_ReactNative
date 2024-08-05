@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { View, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { authRequests } from '@/apis/auth.api';
 import { storeToken } from '@/async-storage/jwtToken';
