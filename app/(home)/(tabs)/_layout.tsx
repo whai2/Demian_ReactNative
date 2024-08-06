@@ -1,8 +1,14 @@
-import { View } from 'react-native';
-import { Tabs } from 'expo-router';
+import { Redirect, Tabs } from 'expo-router';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
+import useAuth from '@/hooks/zustand/useAuth';
 
 export default function TabLayout() {
+  const { userToken } = useAuth();
+  
+  if (!userToken) {
+    return <Redirect href="/login" />;
+  }
+
   return (
     <Tabs
       screenOptions={{
