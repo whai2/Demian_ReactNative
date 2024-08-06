@@ -67,21 +67,6 @@ export default function LoginScreen() {
   );
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: "center",
-//     padding: 16,
-//   },
-//   input: {
-//     height: 40,
-//     borderColor: "gray",
-//     borderWidth: 1,
-//     marginBottom: 12,
-//     paddingHorizontal: 8,
-//   },
-// });
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -89,20 +74,25 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+
   title: {
     fontSize: 24,
     marginBottom: 40,
   },
+
   fieldSet: {
     width: "100%",
     marginBottom: 20,
   },
+
   field: {
     marginBottom: 16,
   },
+
   label: {
     marginBottom: 8,
   },
+
   input: {
     width: "100%",
     padding: 12,
@@ -110,52 +100,30 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
   },
+
   error: {
     borderColor: "red",
   },
+
   errorMessage: {
     color: "red",
     marginTop: 4,
   },
+
   redirectLink: {
     flexDirection: "row",
     marginTop: 20,
     alignItems: "center",
   },
+
   linkText: {
     color: "#007bff",
     marginLeft: 8,
   },
+
   or: {
     flexDirection: "row",
     alignItems: "center",
     marginVertical: 20,
-  },
-  line: {
-    flex: 1,
-    height: 1,
-    backgroundColor: "#ccc",
-  },
-  socialCircles: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "100%",
-  },
-  socialCircle: {
-    alignItems: "center",
-  },
-  kakaoCircle: {
-    width: 47,
-    height: 47,
-    borderRadius: 23.5,
-    backgroundColor: "#FEE600",
-    marginBottom: 8,
-  },
-  naverCircle: {
-    width: 47,
-    height: 47,
-    borderRadius: 23.5,
-    backgroundColor: "#00C73C",
-    marginBottom: 8,
   },
 });
