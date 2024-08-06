@@ -12,6 +12,16 @@ import FloatingButton from "./FloatingButton";
 import { useGetConversations } from "@/hooks/query/conversation";
 import { extractTime } from "@/utils";
 
+const MAX_WORDS = 3;
+
+const truncateText = (text: string, maxWords: number) => {
+  const words = text.split(' ');
+  if (words.length > maxWords) {
+    return words.slice(0, maxWords).join(' ') + '...';
+  }
+  return text;
+};
+
 export default function ChatList() {
   const { data } = useGetConversations();
 
@@ -21,24 +31,33 @@ export default function ChatList() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-    {data?.conversations.map((conversation: any) => (
+      {data?.conversations.map((conversation: any) => (
         <View style={styles.container}>
-        <TouchableOpacity style={styles.item} onPress={() => handleNavigation(conversation._id)}>
-          <View style={styles.itemInner}>
-            <View style={styles.itemTextContent}>
-              <Text style={styles.itemTitle}>{conversation.title}</Text>
-              <View style={styles.wrap}>
-                <Text style={styles.itemLastMessage}>
-                  Last message content...
-                </Text>
-                <Text style={styles.itemLastMessageTime}>{extractTime(conversation.updatedAt)}</Text>
+          <TouchableOpacity
+            style={styles.item}
+            onPress={() => handleNavigation(conversation._id)}
+          >
+            <View style={styles.itemInner}>
+              <View style={styles.itemTextContent}>
+                <Text style={styles.itemTitle}>{conversation.title}</Text>
+                <View style={styles.wrap}>
+                  <Text
+                    style={styles.itemLastMessage}
+                    numberOfLines={1}
+                    ellipsizeMode="tail"
+                  >
+                    {truncateText(conversation.lastMessage.message, MAX_WORDS)}
+                  </Text>
+                  <Text style={styles.itemLastMessageTime}>
+                    {extractTime(conversation.updatedAt)}
+                  </Text>
+                </View>
               </View>
             </View>
-          </View>
-        </TouchableOpacity>
-      </View>
-    ))}
-    <FloatingButton />
+          </TouchableOpacity>
+        </View>
+      ))}
+      <FloatingButton />
     </SafeAreaView>
   );
 }
