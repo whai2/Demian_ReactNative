@@ -9,13 +9,13 @@ import useAuth from "@/hooks/zustand/useAuth";
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const login = useAuth((state) => state.login);
+  const { login } = useAuth();
 
   const handleLogin = async () => {
     try {
       const response = await authRequests.signIn({ email, password });
       await storeToken(response.token);
-
+      login(response.token);
       router.replace("/(tabs)"); 
     } catch (error) {
       Alert.alert("Error", "An error occurred during login");

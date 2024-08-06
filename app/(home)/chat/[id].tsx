@@ -10,17 +10,20 @@ import {
   SafeAreaView,
 } from "react-native";
 import { useLocalSearchParams } from 'expo-router';
-import { useGetInfiniteMessages, useSendMessage } from '@/hooks/query/messages';
+import { useGetInfiniteMessages, useMessageSocket, useSendMessage } from '@/hooks/query/messages';
 import Message from "@/components/Message";
+import useSocket from "@/hooks/zustand/useSocket";
+import { getToken } from '@/async-storage/jwtToken';
 
 export default function Chat() {
+  const { socket, initializeSocket, closeSocket } = useSocket();
   const { id } = useLocalSearchParams();
 
   const { data: messagesData, fetchNextPage } = useGetInfiniteMessages(id as string);
-  const { mutate } = useSendMessage(id as string);
   console.log(messagesData)
-  const [message, setMessage] = useState("");
+  const { mutate } = useSendMessage(id as string);
 
+  const [message, setMessage] = useState("");
   const messageObserverRef = useRef(null);
 
   const handleSendMessage = async (e: any, message: any) => {
@@ -36,19 +39,20 @@ export default function Chat() {
     // navigation.navigate(routes.chatList);
   };
 
-  // useEffect(() => {
-  //   initializeSocket(user._id, conversationId);
+  useEffect(() => {
+    const setupSocket = async () => {
+      const token = await getToken();
+      initializeSocket(token as string, id as string); // Assuming token is needed for initialization
+    };
 
-  //   return () => {
-  //     closeSocket();
-  //   };
-  // }, [user._id, initializeSocket, closeSocket]);
+    setupSocket();
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
-  //   }, 100);
-  // }, [messagesData]);
+    return () => {
+      closeSocket();
+    };
+  }, [initializeSocket, closeSocket]);
+
+  useMessageSocket(socket, id as string);
 
   return (
     <SafeAreaView style={styles.safeArea}>

@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   fromOthersBackground: {
     borderRadius: 20,
     borderTopLeftRadius: 10,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#F3F4F6'
   },
 
   textContainer: {

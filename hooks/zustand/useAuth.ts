@@ -2,18 +2,17 @@ import { create } from 'zustand';
 
 interface AuthType {
   isLoggedIn: boolean;
-  userId: string;
-  login: () => void;
+  userToken: string;
+  login: (userToken: string) => void;
   logout: () => void;
-  setUserId: (userId: string) => void;
 }
 
 const useAuth = create<AuthType>((set) => ({
   isLoggedIn: false,
-  userId: "",
-  login: () => set({ isLoggedIn: true }),
-  logout: () => set({ isLoggedIn: false }),
-  setUserId: (userId: string) => set({ userId: userId }),
+  userToken: "",
+  login: (userToken: string) => set({ isLoggedIn: true, userToken: userToken }),
+  logout: () => set({ isLoggedIn: false, userToken: "" }),
 }));
+
 
 export default useAuth;

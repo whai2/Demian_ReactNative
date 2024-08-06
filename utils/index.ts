@@ -6,7 +6,6 @@ export function extractTime(dateString: string) {
 
   hours = hours % 12;
   hours = hours ? hours : 12; 
-  console.log(padZero(minutes))
   return `${period} ${padZero(hours)}:${padZero(minutes)}`;
 }
 
