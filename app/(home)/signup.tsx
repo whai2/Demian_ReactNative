@@ -1,59 +1,86 @@
-import React, { useState } from 'react';
-import { Link, router } from 'expo-router';
-import { View, TextInput, Button, StyleSheet, Alert } from 'react-native';
-import { authRequests } from '@/apis/auth.api';
-import { storeToken } from '@/async-storage/jwtToken';
+import React, { useState } from "react";
+import { router } from "expo-router";
+import {
+  View,
+  TextInput,
+  Button,
+  StyleSheet,
+  Alert,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+import { authRequests } from "@/apis/auth.api";
+import { storeToken } from "@/async-storage/jwtToken";
 
 export default function SignUpScreen() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSignUp = async () => {
     if (password !== confirmPassword) {
-      Alert.alert('Error', 'Passwords do not match');
+      Alert.alert("Error", "Passwords do not match");
       return;
     }
 
     try {
-      const response = await authRequests.signUp({ email, password, confirmPassword });
-      
+      const response = await authRequests.signUp({
+        email,
+        password,
+        confirmPassword,
+      });
+
       await storeToken(response.token);
 
-      router.replace("/(tabs)"); 
+      router.replace("/(tabs)");
     } catch (error) {
-      Alert.alert('Error', 'An error occurred during sign up');
+      Alert.alert("Error", "An error occurred during sign up");
     }
   };
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Confirm Password"
-        value={confirmPassword}
-        onChangeText={setConfirmPassword}
-        secureTextEntry
-      />
-      <Button title="Sign Up" onPress={handleSignUp} />
-      <Link href="/login" asChild>
-        <Button title="Go to login" />
-      </Link>
+      <Text style={styles.title}>회원가입</Text>
+      <View style={styles.fieldSet}>
+        <View style={styles.field}>
+          <Text style={styles.label}>이메일</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            onChangeText={setEmail}
+            value={email}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+        </View>
+        <View style={styles.field}>
+          <Text style={styles.label}>비밀번호</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
+        </View>
+        <View style={styles.field}>
+          <Text style={styles.label}>비밀번호 확인</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            secureTextEntry
+          />
+        </View>
+        <Button title="Sign Up" onPress={handleSignUp} />
+      </View>
+      <View style={styles.redirectLink}>
+        <Text>이미 회원이라면?</Text>
+        <TouchableOpacity onPress={() => router.navigate("/login")}>
+          <Text style={styles.linkText}>로그인하기</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -61,14 +88,77 @@ export default function SignUpScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    padding: 16,
+    padding: 32,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 40,
+  },
+  fieldSet: {
+    width: "100%",
+    marginBottom: 20,
+  },
+  field: {
+    marginBottom: 16,
+  },
+  label: {
+    marginBottom: 8,
   },
   input: {
-    height: 40,
-    borderColor: 'gray',
+    width: "100%",
+    padding: 12,
+    borderColor: "#ccc",
     borderWidth: 1,
-    marginBottom: 12,
-    paddingHorizontal: 8,
+    borderRadius: 4,
+  },
+  error: {
+    borderColor: "red",
+  },
+  errorMessage: {
+    color: "red",
+    marginTop: 4,
+  },
+  redirectLink: {
+    flexDirection: "row",
+    marginTop: 20,
+    alignItems: "center",
+  },
+  linkText: {
+    color: "#007bff",
+    marginLeft: 8,
+  },
+  or: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 20,
+  },
+  line: {
+    flex: 1,
+    height: 1,
+    backgroundColor: "#ccc",
+  },
+  socialCircles: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "100%",
+  },
+  socialCircle: {
+    alignItems: "center",
+  },
+  kakaoCircle: {
+    width: 47,
+    height: 47,
+    borderRadius: 23.5,
+    backgroundColor: "#FEE600",
+    marginBottom: 8,
+  },
+  naverCircle: {
+    width: 47,
+    height: 47,
+    borderRadius: 23.5,
+    backgroundColor: "#00C73C",
+    marginBottom: 8,
   },
 });
