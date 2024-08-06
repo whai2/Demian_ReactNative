@@ -6,43 +6,37 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-// import { Link } from 'expo-router'; // 필요시 Link 컴포넌트로 교체
+import { router } from "expo-router";
 
 import FloatingButton from "./FloatingButton";
 import { useGetConversations } from "@/hooks/query/conversation";
-
-function extractTime(dateString: string) {
-  const date = new Date(dateString);
-  const hours = padZero(date.getHours());
-  const minutes = padZero(date.getMinutes());
-  return `${hours}:${minutes}`;
-}
-
-function padZero(number: number) {
-  return number.toString().padStart(2, '0');
-}
+import { extractTime } from "@/utils";
 
 export default function ChatList() {
   const { data } = useGetConversations();
 
+  const handleNavigation = (conversationId: string) => {
+    router.push(`/chat/${conversationId}`);
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
-    {data.conversations.map((conversation: any) => (
-      <View style={styles.container}>
-      <TouchableOpacity style={styles.item}>
-        <View style={styles.itemInner}>
-          <View style={styles.itemTextContent}>
-            <Text style={styles.itemTitle}>{conversation.title}</Text>
-            <View style={styles.wrap}>
-              <Text style={styles.itemLastMessage}>
-                Last message content...
-              </Text>
-              <Text style={styles.itemLastMessageTime}>{extractTime(conversation.updatedAt)}</Text>
+    {data?.conversations.map((conversation: any) => (
+        <View style={styles.container}>
+        <TouchableOpacity style={styles.item} onPress={() => handleNavigation(conversation._id)}>
+          <View style={styles.itemInner}>
+            <View style={styles.itemTextContent}>
+              <Text style={styles.itemTitle}>{conversation.title}</Text>
+              <View style={styles.wrap}>
+                <Text style={styles.itemLastMessage}>
+                  Last message content...
+                </Text>
+                <Text style={styles.itemLastMessageTime}>{extractTime(conversation.updatedAt)}</Text>
+              </View>
             </View>
           </View>
-        </View>
-      </TouchableOpacity>
-    </View>
+        </TouchableOpacity>
+      </View>
     ))}
     <FloatingButton />
     </SafeAreaView>
