@@ -9,7 +9,7 @@ import {
   StyleSheet,
   SafeAreaView,
 } from "react-native";
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, router } from 'expo-router';
 import { useGetInfiniteMessages, useMessageSocket, useSendMessage } from '@/hooks/query/messages';
 import Message from "@/components/Message";
 import useSocket from "@/hooks/zustand/useSocket";
@@ -20,7 +20,6 @@ export default function Chat() {
   const { id } = useLocalSearchParams();
 
   const { data: messagesData, fetchNextPage } = useGetInfiniteMessages(id as string);
-  console.log(messagesData)
   const { mutate } = useSendMessage(id as string);
 
   const [message, setMessage] = useState("");
@@ -36,7 +35,7 @@ export default function Chat() {
 
   const goBack = () => {
     messageObserverRef.current = null;
-    // navigation.navigate(routes.chatList);
+    router.back(); 
   };
 
   useEffect(() => {
@@ -60,6 +59,7 @@ export default function Chat() {
         <View style={styles.header}>
           <TouchableOpacity onPress={goBack}>
             {/* <Image source={require('/public/icons/leftBlackArrow.png')} style={styles.icon} /> */}
+            <Text>back</Text>
           </TouchableOpacity>
         </View>
         <ScrollView style={styles.messageContainer}>
