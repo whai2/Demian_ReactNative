@@ -1,9 +1,9 @@
 import axios from 'axios';
-import Config from 'react-native-config';
 import { getToken } from '@/async-storage/jwtToken';
+import { BACKEND_URL } from "@env"
 
 const client = axios.create({
-  baseURL: `http://localhost:3000/api`,
+  baseURL: `${BACKEND_URL}/api`,
   headers: {
     'Content-type': 'application/json',
   },

@@ -32,7 +32,7 @@ export default function ChatList() {
   return (
     <SafeAreaView style={styles.safeArea}>
       {data?.conversations.map((conversation: any) => (
-        <View style={styles.container}>
+        <View style={styles.container} key={conversation._id}>
           <TouchableOpacity
             style={styles.item}
             onPress={() => handleNavigation(conversation._id)}

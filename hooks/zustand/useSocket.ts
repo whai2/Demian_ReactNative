@@ -1,3 +1,4 @@
+import { BACKEND_URL } from '@env';
 import { create } from 'zustand';
 import io from 'socket.io-client';
 
@@ -11,7 +12,7 @@ const useSocket = create<SocketType>((set, get) => ({
   socket: null,
   initializeSocket: (token: string) => {
     if (token) {
-      const socket = io("http://localhost:3000", {
+      const socket = io(`${BACKEND_URL}`, {
         query: {
           token: token,
         },
