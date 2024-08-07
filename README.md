@@ -1,50 +1,95 @@
-# Welcome to your Expo app 👋
+# 데미안 (Demain)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+`데미안`은 `나의 위대한 사서`입니다. PDF 파일을 제시하면, RAG 기반으로 요약합니다.
 
-## Get started
+</br>
 
-1. Install dependencies
+## 🚩배포 주소 바로가기 
+
+https://pickle-time-frontend.vercel.app/
+
+## 🗓️ 개발기간
+
+마이그레이션 전: 2023.06.01 ~ 2023.09.01
+마이그레이션 후: 2024.08.04 ~ 2024.08.07
+
+## 마이그레이션 전 주소
+https://github.com/whai2/demian_flutter/
+
+## 👀 서비스 주요 기능
+
+### 🔔 회원가입/로그인
+  - 회원가입 후 로그인
+    
+#### - 이메일 회원가입
+
+![이메일 회원가입](https://github.com/Splint-Final-Project/Pickle-Time-Frontend/assets/76935187/bb753c17-6f0a-449f-8bc6-44b7b3a667fb)
+
+
+### 🔔 홈페이지
+  - 채팅방: 파일 업로드 시, 해당 파일에 대한 RAG 채팅방 생성
+  - 로그아웃 및 회원 탈퇴
+    
+#### - 채팅 방
+
+![피클생성2](https://github.com/Splint-Final-Project/Pickle-Time-Frontend/assets/76935187/46ec11b9-5941-4e7d-9600-242ce2776bf3)
+
+#### - 로그아웃 및 회원 탈퇴
+
+![찜하기](https://github.com/Splint-Final-Project/Pickle-Time-Frontend/assets/76935187/23d4ad9d-6f30-4ac8-82ed-b68a9c703cd6)
+
+### 🔔 채팅
+  - 파일 업로드 시, RAG 채팅 가능
+    
+#### - 메세지 보내기
+
+![메세지](https://github.com/Splint-Final-Project/Pickle-Time-Frontend/assets/76935187/cf376c51-e39b-49f3-8385-1e67546a088d)
+
+
+</br>
+
+## 로직 설명
+
+ <div style="margin: ; text-align: left;"> 
+   <a href="https://jumbled-tablecloth-e39.notion.site/Demian-AI-26948db5885b4d79ab1f7032673c1504?pvs=4">
+      <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white" alt="Notion">
+   </a>
+</div>
+
+## 💡 기술 스택 (마이그레이션 후)
+
+#### Front-End
+
+<div style="margin: ; text-align: left;">
+  <img src="https://img.shields.io/badge/React_Native-61DAFB?style=for-the-badge&logo=React&logoColor=white" alt="React Native">
+  <img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=Typescript&logoColor=white">
+  <img src="https://img.shields.io/badge/ReactQuery-FF4154?style=for-the-badge&logo=ReactQuery&logoColor=white">
+  <img src="https://img.shields.io/badge/Zustand-82612C?style=for-the-badge&logo=Zustand&logoColor=white">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
+  <img src="https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=white">
+ </div>
+
+#### Back-End
+
+<div style="margin: ; text-align: left;">
+  <img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=Express&logoColor=white">
+  <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=white">
+  <img src="https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=LangChain&logoColor=white">
+  <img src="https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=OpenAI&logoColor=white">
+  <img src="https://img.shields.io/badge/Socket.IO-010101?style=for-the-badge&logo=Socket.IO&logoColor=white">
+ </div>
+
+
+## 로컬에서 시작하기
+
+1. yarn 설치
 
    ```bash
-   npm install
+   yarn install
    ```
 
-2. Start the app
+2. expo 시작
 
    ```bash
     npx expo start
    ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
