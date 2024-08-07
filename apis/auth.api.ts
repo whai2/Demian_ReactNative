@@ -11,4 +11,8 @@ export const authRequests = Object.freeze({
     const { data } = await client.post("/auth/signup", body);
     return data;
   },
+
+  deleteAccount: async () => {
+    await client.delete("/auth");
+  }
 });
