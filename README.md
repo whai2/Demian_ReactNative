@@ -10,11 +10,15 @@ https://pickle-time-frontend.vercel.app/
 
 ## 🗓️ 개발기간
 
-마이그레이션 전: 2023.06.01 ~ 2023.09.01
+마이그레이션 전: 2023.06.01 ~ 2023.09.01<br>
 마이그레이션 후: 2024.08.04 ~ 2024.08.07
 
+## 백엔드 주소
+https://github.com/whai2/Demian_Express
+
 ## 마이그레이션 전 주소
-https://github.com/whai2/demian_flutter/
+백엔드: https://github.com/whai2/demian<br/>
+프론트엔드: https://github.com/whai2/demian_flutter/
 
 ## 👀 서비스 주요 기능
 
